@@ -34,6 +34,75 @@
         <h1>RestServiceApi</h1>
 
 <p>A RESTful web service api bundle for Laravel</p>
+
+<h1>Installation</h1>
+
+<p>Install using artisan for Laravel :</p>
+
+<pre><code>php artisan bundle:install rest_service_api
+</code></pre>
+
+<p>Then add rest_service_api to your application/bundles.php with auto start enabled :</p>
+
+<pre><code>return array('rest_service_api' =&gt; array('auto' =&gt; true, 'handles' =&gt; 'api_docs'));
+</code></pre>
+
+<p>Publish the bundle assets to your public folder.</p>
+
+<pre><code>php artisan bundle:publish
+</code></pre>
+
+<h1>Config</h1>
+
+<p>You can set some configs in rest_service_api/config/</p>
+
+<p>this will adding soon</p>
+
+<h1>Example</h1>
+
+<p>add a api controller</p>
+
+<pre><code>class Api_User_Controller extends Api_Controller{
+
+    public function get_test()
+    {
+        $rules = array(
+            'username'              =&gt; 'required|max:16|unique:users',
+            'password'              =&gt; 'required|between:6,16|alpha_dash',
+        );
+        $par = Api::parameters_check($rules);
+        if(is_string($par))
+        {
+            //here can make some logs
+            return Api::parameters_error($par);
+        }
+        else
+        {
+            print_r($par);
+            //here is your code
+        }
+    }
+
+    public function get_test2()
+    {
+        $par = Api::parameters_check();
+
+        print_r($par);
+        //here is your code
+    }
+}
+</code></pre>
+
+<p>put your api docs to application/documentations like larval docs,you can edit your api docs using markdown</p>
+
+<pre><code>http://localhost/api_docs
+</code></pre>
+
+<p>if you want change the path , you can set in configs</p>
+
+<h1>Notice</h1>
+
+<p>this will be the first version , new things will coming soon!</p>
       </section>
     </div>
 
